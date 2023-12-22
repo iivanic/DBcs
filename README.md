@@ -1,4 +1,4 @@
-# ![DBcs](./DBCs/DBcs-logo.svg)
+# ![DBcs](./DBcs/DBcs-logo.svg)
 DBcs - C# Database helper for PostgreSQL and other DBs.
 
 ## Basic usage
