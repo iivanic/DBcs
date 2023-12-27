@@ -296,6 +296,20 @@ foreach (var a in qs2)
         Console.WriteLine($"      {quiz.Name}");
     }
 }
+Console.WriteLine();
+Console.WriteLine("Generate DDL for postgres from classes:");
+Console.WriteLine(
+     await dBcs.GetDDLCodeString(
+        new [] {
+            typeof(DBAuthor),
+            typeof(DBCategory),
+            typeof(DBQuestion)}, 
+        new [] {
+            "authors",
+            "categories",
+            "questions"}
+             )
+     );
 
 
 dBcs = new DBcs.DBcs(connStringDefaultDb);
