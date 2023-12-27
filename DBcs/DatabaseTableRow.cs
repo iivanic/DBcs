@@ -26,10 +26,10 @@ namespace DBcs
 
             if (ForeignKey != null)
             {
-                if(ForeignKey.ReferencedTable!=null)
-                { 
-                ret += $"\t[ForeignKey(\"{ForeignKey.ReferencedTable.ClassName}\")]{Environment.NewLine}";
-                Comment += $"// property for refernced object";
+                if (ForeignKey.ReferencedTable != null)
+                {
+                    ret += $"\t[ForeignKey(\"{ForeignKey.ReferencedTable.ClassName}\")]{Environment.NewLine}";
+                    Comment += $"// property for refernced object";
                 }
             }
             if (!string.IsNullOrEmpty(Comment))
@@ -41,7 +41,7 @@ namespace DBcs
             {
                 if (ForeignKey.ReferencedTable != null)
                 {
-                    ret += $"\tpublic {ForeignKey.ReferencedTable.ClassName}{(IsDBNull ? "?" : "")} {ForeignKey.ReferencedTable.ClassName} {{get; set;}}{getDefault()}{Environment.NewLine}";
+                    ret += $"\t[NotMapped]{Environment.NewLine}\tpublic {ForeignKey.ReferencedTable.ClassName}{(IsDBNull ? "?" : "")} {ForeignKey.ReferencedTable.ClassName} {{get; set;}}{getDefault()}{Environment.NewLine}";
                 }
             }
 
@@ -53,7 +53,7 @@ namespace DBcs
             if (IsDBNull == false)
             {
                 if (!IsValueType(DotNetPropertyType))
-                { 
+                {
 
                     if (PropertyType == "string")
                         return " = string.Empty;";
@@ -61,7 +61,7 @@ namespace DBcs
                     if (PropertyType == "string[]")
                         return " = [];";
                     ret = $" = new {PropertyType}();";
-              }
+                }
             }
             return ret;
 
@@ -71,11 +71,11 @@ namespace DBcs
         private bool IsValueType(string type)
         {
             Type t = Type.GetType(type);
-            if(t == null) 
+            if (t == null)
                 return false;
             return t.IsValueType;
 
-           
+
         }
     }
 }

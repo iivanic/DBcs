@@ -10,10 +10,12 @@ public class DBQuestion
     [ForeignKey("DBCategory")]
     // property for refernced object
     public int CategoryId { get; set; }
-    public DBCategory DBCategory { get; set; }
+    [NotMapped]
+    public DBCategory DBCategory { get; set; }=new DBCategory();
     [ForeignKey("DBAuthor")]
     // property for refernced object
     public int? AuthorId { get; set; }
+    [NotMapped]
     public DBAuthor? DBAuthor { get; set; }
     public string Question { get; set; } = string.Empty;
     public string CorrectAnswer { get; set; } = string.Empty;
@@ -37,7 +39,8 @@ public class DBCategory
     public string Name { get; set; } = string.Empty;
     public bool IsDeleted { get; set; }
     // Collection of class that references via FK
-    public List<DBQuestion> Questions { get; set; } = new List<DBQuestion>();
+      [NotMapped]
+      public List<DBQuestion> Questions { get; set; } = new List<DBQuestion>();
     // Not used by DBHelp directly
     public const string SelectText = "select * from categories;";
     public const string UpdateText = "update categories set name=@name, is_deleted=@is_deleted where id=@id returning *;";
@@ -54,9 +57,11 @@ public class DBAuthor
     public string Name { get; set; } = string.Empty;
     public bool IsDeleted { get; set; }
     // Collection of class that references via FK
-    public List<DBQuestion>? Questions { get; set; }
+      [NotMapped]
+      public List<DBQuestion>? Questions { get; set; }
     // Collection of class that references via FK
-    public List<DBQuiz>? Quizzes { get; set; }
+      [NotMapped]
+      public List<DBQuiz>? Quizzes { get; set; }
     // Not used by DBHelp directly
     public const string SelectText = "select * from authors;";
     public const string UpdateText = "update authors set name=@name, is_deleted=@is_deleted where id=@id returning *;";
@@ -76,9 +81,11 @@ public class DBQuiz
     [ForeignKey("DBAuthor")]
     // property for refernced object
     public int? AuthorId { get; set; }
-    public DBAuthor? DBAuthor { get; set; }
+      [NotMapped]
+      public DBAuthor? DBAuthor { get; set; }
     // Collection of class that references via FK
-    public List<DBQuizQuestion> QuizzesQuestions { get; set; } = new List<DBQuizQuestion>();
+     [NotMapped]
+      public List<DBQuizQuestion> QuizzesQuestions { get; set; } = new List<DBQuizQuestion>();
     // Not used by DBHelp directly
     public const string SelectText = "select * from quizzes;";
     public const string UpdateText = "update quizzes set name=@name, avalaible_from=@avalaible_from, avalaibilty_end=@avalaibilty_end, author_id=@author_id where id=@id returning *;";
@@ -95,10 +102,12 @@ public class DBQuizQuestion
     [ForeignKey("DBQuiz")]
     // property for refernced object
     public int QuizId { get; set; }
+      [NotMapped]
     public DBQuiz DBQuiz { get; set; }
     [ForeignKey("DBQuestion")]
     // property for refernced object
     public int QuestionId { get; set; }
+      [NotMapped]
     public DBQuestion DBQuestion { get; set; }
     // Not used by DBHelp directly
     public const string SelectText = "select * from quizzes_questions;";
