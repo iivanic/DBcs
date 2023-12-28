@@ -160,7 +160,7 @@ public class DBcs
     public async Task<string> GetDDLCodeString(Type[] types, string[] tableNames)
     {
         Class2DDL c = new Class2DDL();
-        return await c.getDDL(types, tableNames);
+        return await c.GetDdl(types, tableNames);
     }
     public async Task<string> GetDDLCodeString(Type type, string tableName)
     {
