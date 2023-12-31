@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 var dbName = "db_helper_quiz";
 // with postgres we can not change databases while connected
 // so we must have two connection strings and reconnect
-const string connString = @"Server=localhost;Port=5432;Username=postgres;Password=sa;database={DATABASE};";
+const string connString = @"Server=192.168.0.2;Port=5432;Username=pguser;Password=sa;database={DATABASE};";
 var connStringDefaultDb = connString.Replace("{DATABASE}", "postgres"); ;
 var connStringMyDb = connString.Replace("{DATABASE}", dbName);
 
@@ -299,7 +299,7 @@ foreach (var a in qs2)
 Console.WriteLine();
 Console.WriteLine("Generate DDL for postgres from classes:");
 Console.WriteLine(
-     await dBcs.GetDDLCodeString(
+      dBcs.GetDDLCodeString(
         new [] {
             typeof(DBAuthor),
             typeof(DBCategory),

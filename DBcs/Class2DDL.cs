@@ -8,13 +8,13 @@ namespace DBcs;
 
 public class Class2DDL
 {
-    public async Task<string> GetDdl(Type[] types, string[] tableNames)
+    public string GetDdl(Type[] types, string[] tableNames)
     {
         var ret = "";
         var cnt = 0;
         foreach (var type in types)
         {
-            ret += $"{await GetClassCodeString(type, tableNames[cnt])}{Environment.NewLine}";
+            ret += $"{GetClassCodeString(type, tableNames[cnt])}{Environment.NewLine}";
             cnt++;
         }
 
@@ -48,7 +48,7 @@ public class Class2DDL
         return ret;
     }
 
-    private async Task<string> GetClassCodeString(Type type, string tableName = "")
+    private string GetClassCodeString(Type type, string tableName = "")
     {
         var ret = "";
         if (string.IsNullOrEmpty(tableName))
@@ -73,8 +73,13 @@ public class Class2DDL
             ret += p.Column;
             constraints += p.Constraint;
         }
-
-        ret = $"{ret}{constraints}{Environment.NewLine});";
+        // remove comma at the end 
+        ret = $"{ret}{constraints}";
+        if (ret.EndsWith($",{Environment.NewLine}"))
+        {
+            ret=ret.Substring(0,ret.Length-3);
+        }
+        ret += $"{Environment.NewLine});";
         return ret;
     }
 

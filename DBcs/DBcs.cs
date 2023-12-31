@@ -157,14 +157,14 @@ public class DBcs
     #endregion
 
     #region DDL generation
-    public async Task<string> GetDDLCodeString(Type[] types, string[] tableNames)
+    public string GetDDLCodeString(Type[] types, string[] tableNames)
     {
         Class2DDL c = new Class2DDL();
-        return await c.GetDdl(types, tableNames);
+        return c.GetDdl(types, tableNames);
     }
-    public async Task<string> GetDDLCodeString(Type type, string tableName)
+    public string GetDDLCodeString(Type type, string tableName)
     {
-        return await GetDDLCodeString(new[] { type }, new[] { tableName }); 
+        return GetDDLCodeString(new[] { type }, new[] { tableName }); 
     }
 
     #endregion
