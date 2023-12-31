@@ -296,6 +296,7 @@ foreach (var a in qs2)
         Console.WriteLine($"      {quiz.Name}");
     }
 }
+
 Console.WriteLine();
 Console.WriteLine("Generate DDL for postgres from classes:");
 Console.WriteLine(
